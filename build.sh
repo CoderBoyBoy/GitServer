@@ -16,6 +16,9 @@ mkdir -p target/jar-build
 cd target/jar-build
 
 # Extract all dependencies
+# Note: We use a manual extraction approach instead of Maven's dependency:copy-dependencies
+# because the Maven shade plugin has issues with certain dependency downloads in this environment.
+# This ensures all required JARs (JGit, Jetty, SSHD, BouncyCastle, etc.) are included.
 echo "Step 3: Extracting dependencies..."
 for jar in $(find ~/.m2/repository -name "*.jar" | grep -E "(jgit|jetty|sshd|slf4j|jakarta.*servlet|bcprov|bcpg|bcpkix|bcutil|JavaEWAH|commons-codec)" | grep -v "sources\|javadoc" | grep -v "9.4.54" | grep -v "2.16.0"); do
     echo "  Extracting: $(basename $jar)"

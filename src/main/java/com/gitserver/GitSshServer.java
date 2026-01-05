@@ -46,14 +46,20 @@ public class GitSshServer {
         sshServer.setKeyPairProvider(new SimpleGeneratorHostKeyProvider(hostKeyPath));
 
         // Configure authentication
-        // For simplicity, accept all password authentication
-        // In production, you should implement proper authentication
+        // ⚠️ SECURITY WARNING: This accepts ALL password authentication attempts without validation
+        // This is ONLY suitable for demo/development purposes in isolated environments
+        // For production use, you MUST implement:
+        //   1. Proper user/password verification against a secure credential store
+        //   2. SSH public key authentication
+        //   3. Access control lists (ACLs) for repository permissions
+        //   4. Rate limiting to prevent brute force attacks
+        //   5. Audit logging for all authentication attempts
         sshServer.setPasswordAuthenticator(new PasswordAuthenticator() {
             @Override
             public boolean authenticate(String username, String password, ServerSession session) {
                 logger.info("Password authentication for user: {}", username);
                 // Accept any username/password for demo purposes
-                // In production, implement proper authentication
+                // TODO: Implement proper authentication for production use
                 return true;
             }
         });
