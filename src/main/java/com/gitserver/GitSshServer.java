@@ -39,7 +39,10 @@ public class GitSshServer {
         sshServer.setPort(port);
 
         // Set up host key provider
-        Path hostKeyPath = Paths.get(repositoryDir.getParent(), "hostkey.ser");
+        File hostKeyFile = new File(repositoryDir.getParentFile() != null ? 
+                                     repositoryDir.getParentFile() : new File("."), 
+                                     "hostkey.ser");
+        Path hostKeyPath = hostKeyFile.toPath();
         sshServer.setKeyPairProvider(new SimpleGeneratorHostKeyProvider(hostKeyPath));
 
         // Configure authentication

@@ -56,6 +56,16 @@
             <groupId>org.apache.sshd</groupId>
             <artifactId>sshd-git</artifactId>
             <version>${sshd.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.sshd</groupId>
+                    <artifactId>sshd-sftp</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.sshd</groupId>
+                    <artifactId>sshd-osgi</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- Jetty Server for HTTP -->
