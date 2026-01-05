@@ -12,20 +12,49 @@
 
 ## 技术栈
 
-- **JGit 7.5.0**: Eclipse JGit - Java实现的Git
+- **JGit 7.5.0**: Eclipse JGit - Java实现的Git（2025年12月最新版）
 - **Apache SSHD 2.11.0**: SSH服务器实现
-- **Eclipse Jetty 11.0.18**: HTTP服务器
+- **Eclipse Jetty 11.0.26**: HTTP服务器
+- **BouncyCastle 1.76**: 加密库支持
 - **Maven**: 项目构建工具
 
 ## 快速开始
 
-### 编译项目
+### 方法1: 使用构建脚本（推荐）
 
 ```bash
-mvn clean package
+# 编译并打包
+./build.sh
+
+# 启动服务器
+java -jar target/gitserver-1.0.0.jar
 ```
 
-编译后会在`target`目录生成`gitserver-1.0.0.jar`文件。
+### 方法2: 使用Maven
+
+```bash
+# 编译项目
+mvn clean compile
+
+# 使用构建脚本打包
+./build.sh
+```
+
+### 快速演示
+
+运行演示脚本查看服务器功能：
+
+```bash
+./demo.sh
+```
+
+### 运行测试
+
+运行自动化测试脚本：
+
+```bash
+./test.sh
+```
 
 ### 启动服务器
 
@@ -89,6 +118,10 @@ git push -u origin master
 ```
 GitServer/
 ├── pom.xml                                    # Maven项目配置
+├── build.sh                                   # 构建脚本
+├── test.sh                                    # 测试脚本
+├── demo.sh                                    # 演示脚本
+├── .gitignore                                 # Git忽略文件配置
 ├── src/
 │   └── main/
 │       ├── java/
@@ -99,6 +132,8 @@ GitServer/
 │       │           └── GitSshServer.java          # SSH服务器实现
 │       └── resources/
 │           └── simplelogger.properties        # 日志配置
+├── target/
+│   └── gitserver-1.0.0.jar                   # 可执行JAR（构建后生成）
 └── repositories/                              # Git仓库存储目录（自动创建）
 ```
 
